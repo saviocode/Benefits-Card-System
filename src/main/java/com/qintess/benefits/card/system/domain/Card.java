@@ -28,5 +28,6 @@ public class Card {
 
     private LocalDate validity;
 
+    private boolean active = Boolean.TRUE;
 
 }
