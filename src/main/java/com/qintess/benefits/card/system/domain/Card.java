@@ -2,10 +2,7 @@ package com.qintess.benefits.card.system.domain;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "card")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Card {
@@ -22,12 +20,17 @@ public class Card {
 
     private String number;
 
+    private Double debit;
+
     private Double credit;
 
-    private Double debit;
+    @Enumerated(EnumType.STRING)
+    private CardType type;
 
     private LocalDate validity;
 
     private boolean active = Boolean.TRUE;
 
 }
+
+
