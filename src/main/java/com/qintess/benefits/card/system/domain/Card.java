@@ -16,19 +16,26 @@ import java.time.LocalDate;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "card_id")
     private Long id;
 
+    @Column(name = "number", unique = true)
     private String number;
 
-    private Double debit;
-
+    @Column(name = "credit")
     private Double credit;
 
-    @Enumerated(EnumType.STRING)
-    private CardType type;
+    @Column(name = "debit")
+    private Double debit;
 
+    @Column(name = "validity")
     private LocalDate validity;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "card_type", nullable = false)
+    private CardType type;
+
+    @Column(name = "active")
     private boolean active = Boolean.TRUE;
 
 }
