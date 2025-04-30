@@ -1,6 +1,7 @@
 package com.qintess.benefits.card.system.controller;
 
 import com.qintess.benefits.card.system.domain.Card;
+import com.qintess.benefits.card.system.domain.dto.CreateCardRequestDTO;
 import com.qintess.benefits.card.system.domain.dto.OperatorRequestDTO;
 import com.qintess.benefits.card.system.service.CardService;
 import org.slf4j.Logger;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/cards")
+@RequestMapping("/api/card")
 public class CardController {
 
     private static final Logger logger = LoggerFactory.getLogger(CardController.class);
@@ -25,7 +26,7 @@ public class CardController {
 
 
     @PostMapping
-    public ResponseEntity<Card> createCard(@RequestBody Card card) {
+    public ResponseEntity<Card> createCard(@RequestBody CreateCardRequestDTO card) {
         logger.info("Creating new card with number: {}", card.getNumber());
         Card createdCard = cardService.create(card);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCard);

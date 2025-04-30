@@ -1,6 +1,7 @@
 package com.qintess.benefits.card.system.domain;
 
 
+import com.qintess.benefits.card.system.domain.enums.CardType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,6 +38,10 @@ public class Card {
 
     @Column(name = "active")
     private boolean active = Boolean.TRUE;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 
 }
 

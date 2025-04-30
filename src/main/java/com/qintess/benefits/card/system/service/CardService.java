@@ -1,11 +1,12 @@
 package com.qintess.benefits.card.system.service;
 
 import com.qintess.benefits.card.system.domain.Card;
+import com.qintess.benefits.card.system.domain.dto.CreateCardRequestDTO;
 
 import java.util.Optional;
 
 public interface CardService {
-    Card create(Card card);
+    Card create(CreateCardRequestDTO card);
 
     Double balance(Card card);
 

@@ -1,4 +1,4 @@
-package com.qintess.benefits.card.system.domain;
+package com.qintess.benefits.card.system.domain.enums;
 
 
 import lombok.Getter;

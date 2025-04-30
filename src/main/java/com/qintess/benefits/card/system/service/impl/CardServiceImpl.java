@@ -1,7 +1,10 @@
 package com.qintess.benefits.card.system.service.impl;
 
 import com.qintess.benefits.card.system.domain.Card;
+import com.qintess.benefits.card.system.domain.User;
+import com.qintess.benefits.card.system.domain.dto.CreateCardRequestDTO;
 import com.qintess.benefits.card.system.repository.CardRepository;
+import com.qintess.benefits.card.system.repository.UserRepository;
 import com.qintess.benefits.card.system.service.CardService;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -15,21 +18,27 @@ public class CardServiceImpl implements CardService {
     private static final Logger logger = LoggerFactory.getLogger(CardServiceImpl.class);
 
     private final CardRepository cardRepository;
+    private final UserRepository userRepository;
 
-    public CardServiceImpl(CardRepository cardRepository) {
+    public CardServiceImpl(CardRepository cardRepository, UserRepository userRepository) {
         this.cardRepository = cardRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
-    public Card create(Card card) {
+    public Card create(CreateCardRequestDTO card) {
+        User user = userRepository.findById(card.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+
         Card novoCartao = Card.builder()
                 .number(card.getNumber())
                 .credit(card.getCredit() != null ? card.getCredit() : 0.0)
                 .debit(card.getDebit() != null ? card.getDebit() : 0.0)
                 .validity(card.getValidity())
                 .type(card.getType())
-                .active(card.isActive())
+                .active(card.getActive())
+                .user(user)
                 .build();
         return cardRepository.save(novoCartao);
     }
